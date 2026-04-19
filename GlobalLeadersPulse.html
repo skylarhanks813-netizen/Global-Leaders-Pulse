@@ -1,0 +1,1260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Global Leaders Pulse</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+/* ════════════════════════════════
+   GLOBAL LEADERS PULSE — style.css
+════════════════════════════════ */
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:        #0C0F1A;
+  --bg2:       #121624;
+  --bg3:       #1A1F30;
+  --bg4:       #1E2438;
+  --gold:      #C9A84C;
+  --gold-a:    rgba(201,168,76,0.15);
+  --gold-b:    rgba(201,168,76,0.3);
+  --text:      #F0EDE6;
+  --muted:     #8A8FA8;
+  --dim:       #5C617A;
+  --green:     #3D9E6E;
+  --red:       #C0392B;
+  --border:    rgba(255,255,255,0.08);
+  --r:         10px;
+  --rl:        16px;
+  --t:         all 0.25s ease;
+}
+
+html { scroll-behavior: smooth; font-size: 16px; }
+body { background: var(--bg); color: var(--text); font-family: 'DM Sans', sans-serif; font-weight: 300; line-height: 1.7; }
+img, svg { display: block; }
+button { cursor: pointer; border: none; background: none; font-family: inherit; color: inherit; }
+a { color: inherit; text-decoration: none; }
+ul { list-style: none; }
+
+.skip-link {
+  position: absolute; top: -100%; left: 1rem;
+  background: var(--gold); color: #000;
+  padding: 0.5rem 1rem; border-radius: var(--r);
+  font-weight: 500; z-index: 9999; transition: top 0.2s;
+}
+.skip-link:focus { top: 1rem; }
+
+/* ── NAVBAR ── */
+.navbar {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(12,15,26,0.94);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-inner {
+  max-width: 1200px; margin: 0 auto;
+  padding: 0 1.5rem; height: 64px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.nav-logo {
+  display: flex; align-items: center; gap: 10px;
+  font-family: 'Playfair Display', serif; font-size: 1.05rem;
+}
+.nav-logo strong { color: var(--gold); }
+.nav-links { display: flex; align-items: center; gap: 2rem; }
+.nav-link {
+  font-size: 0.85rem; font-weight: 400; color: var(--muted);
+  letter-spacing: 0.06em; text-transform: uppercase;
+  transition: var(--t);
+}
+.nav-link:hover { color: var(--text); }
+.nav-link:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; border-radius: 2px; }
+
+.btn-auth {
+  padding: 0.4rem 1.2rem;
+  border: 1px solid var(--gold-b);
+  border-radius: 40px; color: var(--gold);
+  font-size: 0.85rem; font-weight: 500;
+  transition: var(--t); background: transparent;
+}
+.btn-auth:hover { background: var(--gold); color: #000; border-color: var(--gold); }
+.btn-auth:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+
+.hamburger { display: none; flex-direction: column; gap: 5px; padding: 6px; }
+.hamburger span { display: block; width: 22px; height: 1.5px; background: var(--muted); transition: var(--t); transform-origin: center; }
+.hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+.hamburger:focus-visible { outline: 2px solid var(--gold); border-radius: 3px; }
+
+.nav-mobile {
+  background: var(--bg2); border-top: 1px solid var(--border);
+  padding: 1rem 1.5rem 1.5rem;
+  display: flex; flex-direction: column; gap: 1rem;
+}
+.nav-mobile a, .nav-mobile button {
+  font-size: 0.95rem; color: var(--muted);
+  text-transform: uppercase; letter-spacing: 0.05em;
+}
+.nav-mobile .btn-auth { align-self: flex-start; }
+
+/* ── HERO ── */
+.hero {
+  position: relative; min-height: 100svh;
+  display: flex; flex-direction: column;
+  justify-content: center; align-items: center;
+  padding: 5rem 1.5rem 4rem; text-align: center; overflow: hidden;
+}
+.hero-dots {
+  position: absolute; inset: 0; pointer-events: none;
+  background-image: radial-gradient(circle, rgba(201,168,76,0.12) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+.hero::before {
+  content: ''; position: absolute; inset: 0; pointer-events: none;
+  background: radial-gradient(ellipse 70% 60% at 50% 50%, transparent, var(--bg) 85%);
+}
+.hero-content { position: relative; z-index: 1; max-width: 760px; }
+.hero-eyebrow {
+  font-size: 0.78rem; font-weight: 500; letter-spacing: 0.18em;
+  text-transform: uppercase; color: var(--gold); margin-bottom: 1.25rem;
+}
+.hero-heading {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2.6rem, 7vw, 5rem);
+  font-weight: 700; line-height: 1.08;
+  letter-spacing: -0.02em; margin-bottom: 1.25rem;
+}
+.hero-heading em { font-style: italic; color: var(--gold); }
+.hero-sub { font-size: 1.05rem; color: var(--muted); max-width: 520px; margin: 0 auto 2rem; }
+
+.hero-stats {
+  position: relative; z-index: 1;
+  display: flex; align-items: center; justify-content: center;
+  gap: 2.5rem; margin-top: 4rem; padding-top: 2rem;
+  border-top: 1px solid var(--border);
+  max-width: 480px; width: 100%;
+}
+.stat { text-align: center; }
+.stat-num { display: block; font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 700; color: var(--gold); line-height: 1; }
+.stat-label { display: block; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--dim); margin-top: 4px; }
+.stat-div { width: 1px; height: 36px; background: var(--border); }
+
+/* ── BUTTONS ── */
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 0.7rem 1.8rem;
+  background: var(--gold); color: #000;
+  font-weight: 500; font-size: 0.92rem;
+  border-radius: 40px; border: none;
+  transition: var(--t); cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+}
+.btn-primary:hover { background: #dbb95f; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(201,168,76,0.3); }
+.btn-primary:active { transform: translateY(0); }
+.btn-primary:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+.btn-sm { padding: 0.45rem 1.1rem; font-size: 0.84rem; }
+.btn-full { width: 100%; justify-content: center; }
+
+/* ── LEADERS SECTION ── */
+.leaders-section { max-width: 1200px; margin: 0 auto; padding: 5rem 1.5rem; }
+.section-header { text-align: center; margin-bottom: 3rem; }
+.section-header h2 { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 700; margin-bottom: 0.4rem; }
+.section-header p { color: var(--muted); font-size: 0.97rem; }
+
+.flag-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+  gap: 1.1rem;
+}
+
+.flag-card {
+  background: var(--bg4);
+  border: 1px solid var(--border);
+  border-radius: var(--rl);
+  padding: 1.1rem;
+  display: flex; flex-direction: column;
+  align-items: center; gap: 0.75rem;
+  cursor: pointer; text-align: center;
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+  position: relative; overflow: hidden;
+}
+.flag-card:hover {
+  transform: translateY(-6px) scale(1.02);
+  border-color: var(--gold-b);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.5);
+}
+.flag-card:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+.flag-card:active { transform: translateY(-2px) scale(1.01); }
+
+.flag-wrap {
+  width: 72px; height: 48px;
+  border-radius: 5px; overflow: hidden;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.4);
+  transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1);
+}
+.flag-card:hover .flag-wrap { transform: scale(1.1) rotate(-1deg); }
+.flag-svg { width: 100%; height: 100%; }
+
+.flag-country { display: block; font-size: 0.72rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--dim); margin-bottom: 1px; }
+.flag-leader { display: block; font-family: 'Playfair Display', serif; font-size: 0.92rem; color: var(--text); }
+
+/* ── PROFILE SECTION ── */
+.profile-section {
+  background: var(--bg2); border-top: 1px solid var(--border);
+  padding: 3.5rem 1.5rem;
+  animation: slideDown 0.4s ease;
+}
+@keyframes slideDown { from { opacity:0; transform:translateY(-16px); } to { opacity:1; transform:translateY(0); } }
+
+.profile-inner { max-width: 1100px; margin: 0 auto; }
+
+.profile-close {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 0.83rem; color: var(--muted);
+  padding: 0.4rem 0.9rem;
+  border: 1px solid var(--border); border-radius: 30px;
+  margin-bottom: 2rem; transition: var(--t);
+}
+.profile-close:hover { color: var(--text); border-color: var(--gold-b); }
+.profile-close:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+
+.profile-grid { display: grid; grid-template-columns: 280px 1fr; gap: 2.5rem; align-items: start; }
+
+.profile-left { text-align: center; }
+.profile-avatar {
+  width: 120px; height: 120px; border-radius: 50%;
+  background: var(--bg3); border: 2px solid var(--gold-b);
+  margin: 0 auto 1rem;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Playfair Display', serif; font-size: 2.2rem; font-weight: 700; color: var(--gold);
+}
+.profile-badge {
+  display: inline-block; background: var(--gold); color: #000;
+  font-size: 0.65rem; font-weight: 700; letter-spacing: 0.08em;
+  padding: 3px 10px; border-radius: 20px; margin-bottom: 0.6rem;
+}
+.profile-name { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 700; margin-bottom: 4px; }
+.profile-post { font-size: 0.8rem; font-weight: 500; color: var(--gold); letter-spacing: 0.07em; text-transform: uppercase; margin-bottom: 0.9rem; }
+
+.profile-parties { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; margin-bottom: 1.25rem; }
+.party-chip { padding: 4px 12px; border-radius: 20px; font-size: 0.76rem; font-weight: 500; }
+.party-chip.ruling { background: rgba(61,158,110,0.15); border: 1px solid rgba(61,158,110,0.4); color: #5ecfa0; }
+.party-chip.opp { background: rgba(192,57,43,0.1); border: 1px solid rgba(192,57,43,0.35); color: #e07070; }
+
+.profile-meta {
+  background: var(--bg3); border: 1px solid var(--border);
+  border-radius: var(--r); padding: 0.9rem; text-align: left;
+  display: flex; flex-direction: column; gap: 0.6rem;
+}
+.meta-row { display: flex; flex-direction: column; gap: 1px; }
+.meta-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--dim); }
+.meta-val { font-size: 0.9rem; color: var(--text); }
+
+/* Tabs */
+.profile-tabs { display: flex; border-bottom: 1px solid var(--border); margin-bottom: 1.25rem; }
+.tab-btn {
+  padding: 0.6rem 1.1rem; font-size: 0.85rem; font-weight: 500;
+  color: var(--dim); border: none; background: none;
+  border-bottom: 2px solid transparent; margin-bottom: -1px;
+  transition: var(--t); cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+}
+.tab-btn:hover { color: var(--text); }
+.tab-btn.active { color: var(--gold); border-bottom-color: var(--gold); }
+.tab-btn:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; border-radius: 3px; }
+
+.tab-panel { display: none; }
+.tab-panel.active { display: block; animation: fadeIn 0.25s ease; }
+.tab-panel p { font-size: 0.95rem; color: var(--muted); line-height: 1.85; }
+
+@keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+
+.controversy-box {
+  background: rgba(201,168,76,0.06); border: 1px solid var(--gold-b);
+  border-radius: var(--r); padding: 1.1rem;
+  display: flex; gap: 0.9rem; align-items: flex-start;
+}
+.controversy-box p { font-size: 0.95rem; color: var(--muted); line-height: 1.85; }
+
+/* ── ENGAGEMENT ── */
+.engagement-bar {
+  margin-top: 2.5rem; padding-top: 2rem;
+  border-top: 1px solid var(--border);
+  display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 2rem;
+}
+.engage-block h3 {
+  font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 700;
+  margin-bottom: 0.9rem;
+}
+
+.vote-btns { display: flex; gap: 0.6rem; margin-bottom: 0.85rem; }
+.vote-btn {
+  flex: 1; display: flex; align-items: center; justify-content: center; gap: 6px;
+  padding: 0.55rem; border-radius: var(--r);
+  border: 1px solid var(--border); background: var(--bg3);
+  font-size: 0.83rem; font-weight: 500; color: var(--muted);
+  transition: var(--t); cursor: pointer; font-family: 'DM Sans', sans-serif;
+}
+.vote-btn.approve:hover, .vote-btn.approve.active { background: rgba(61,158,110,0.15); border-color: rgba(61,158,110,0.5); color: #5ecfa0; }
+.vote-btn.disapprove:hover, .vote-btn.disapprove.active { background: rgba(192,57,43,0.12); border-color: rgba(192,57,43,0.45); color: #e07070; }
+.vote-btn:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+
+.approval-bar { height: 5px; background: rgba(192,57,43,0.2); border-radius: 10px; overflow: hidden; margin-bottom: 5px; }
+.approval-fill { height: 100%; background: var(--green); border-radius: 10px; transition: width 0.5s ease; }
+.approval-labels { display: flex; justify-content: space-between; font-size: 0.73rem; color: var(--dim); }
+
+.react-btns { display: flex; gap: 0.8rem; }
+.react-btn {
+  display: flex; align-items: center; gap: 7px;
+  padding: 0.6rem 1rem; border-radius: var(--r);
+  border: 1px solid var(--border); background: var(--bg3);
+  font-size: 0.88rem; font-weight: 500; color: var(--muted);
+  transition: var(--t); cursor: pointer; font-family: 'DM Sans', sans-serif;
+}
+.react-btn.like:hover, .react-btn.like.active { background: rgba(201,168,76,0.12); border-color: var(--gold-b); color: var(--gold); }
+.react-btn.dislike:hover, .react-btn.dislike.active { background: rgba(192,57,43,0.1); border-color: rgba(192,57,43,0.35); color: #e07070; }
+.react-btn:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+
+.opinion-block textarea {
+  width: 100%; background: var(--bg3); border: 1px solid var(--border);
+  border-radius: var(--r); color: var(--text);
+  font-family: 'DM Sans', sans-serif; font-size: 0.9rem;
+  padding: 0.65rem 0.9rem; resize: vertical; min-height: 80px;
+  transition: border-color 0.2s;
+}
+.opinion-block textarea:focus { outline: none; border-color: var(--gold-b); box-shadow: 0 0 0 3px rgba(201,168,76,0.1); }
+.opinion-block textarea::placeholder { color: var(--dim); }
+
+.opinion-footer-row { display: flex; align-items: center; justify-content: space-between; margin-top: 0.5rem; }
+.char-count { font-size: 0.72rem; color: var(--dim); }
+
+.field-error { font-size: 0.76rem; color: #e07070; display: block; min-height: 1rem; margin-top: 2px; }
+
+.opinions-list { margin-top: 0.9rem; display: flex; flex-direction: column; gap: 0.5rem; max-height: 180px; overflow-y: auto; }
+.opinion-item { background: var(--bg3); border: 1px solid var(--border); border-radius: var(--r); padding: 0.6rem 0.85rem; font-size: 0.85rem; color: var(--muted); }
+.opinion-item .op-meta { font-size: 0.7rem; color: var(--dim); margin-bottom: 2px; }
+
+/* ── ABOUT ── */
+.about-section { padding: 5rem 1.5rem; background: var(--bg2); border-top: 1px solid var(--border); }
+.about-inner { max-width: 880px; margin: 0 auto; text-align: center; }
+.about-inner h2 { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 4vw, 2.4rem); font-weight: 700; margin-bottom: 0.9rem; }
+.about-inner > p { color: var(--muted); max-width: 640px; margin: 0 auto 2.5rem; font-size: 0.97rem; }
+.about-cards { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.25rem; }
+.about-card { background: var(--bg4); border: 1px solid var(--border); border-radius: var(--rl); padding: 1.75rem 1.25rem; transition: var(--t); }
+.about-card:hover { border-color: var(--gold-b); transform: translateY(-4px); }
+.about-card svg { margin: 0 auto 0.9rem; }
+.about-card h3 { font-family: 'Playfair Display', serif; font-size: 1.05rem; font-weight: 700; margin-bottom: 0.4rem; }
+.about-card p { font-size: 0.87rem; color: var(--muted); }
+
+/* ── FOOTER ── */
+.footer { border-top: 1px solid var(--border); padding: 2rem 1.5rem; }
+.footer-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem; }
+.footer-logo { font-family: 'Playfair Display', serif; font-size: 1rem; }
+.footer-logo strong { color: var(--gold); }
+.footer-copy { font-size: 0.78rem; color: var(--dim); }
+
+/* ── MODAL ── */
+.modal-overlay {
+  position: fixed; inset: 0; z-index: 1000;
+  background: rgba(0,0,0,0.75); backdrop-filter: blur(6px);
+  display: flex; align-items: center; justify-content: center; padding: 1rem;
+}
+.modal {
+  background: var(--bg2); border: 1px solid var(--border);
+  border-radius: var(--rl); padding: 2.25rem;
+  width: 100%; max-width: 420px; position: relative;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+  animation: scaleIn 0.25s cubic-bezier(0.34,1.56,0.64,1);
+}
+@keyframes scaleIn { from { transform:scale(0.92); opacity:0; } to { transform:scale(1); opacity:1; } }
+
+.modal-close {
+  position: absolute; top: 1rem; right: 1rem;
+  width: 32px; height: 32px; display: flex;
+  align-items: center; justify-content: center;
+  background: var(--bg3); border: 1px solid var(--border);
+  border-radius: 8px; color: var(--muted); transition: var(--t);
+}
+.modal-close:hover { color: var(--text); border-color: var(--gold-b); }
+.modal-close:focus-visible { outline: 2px solid var(--gold); }
+
+.modal-tabs {
+  display: flex; background: var(--bg3);
+  border-radius: 8px; padding: 3px; gap: 3px; margin-bottom: 1.5rem;
+}
+.modal-tab {
+  flex: 1; padding: 0.45rem; font-size: 0.86rem; font-weight: 500;
+  color: var(--dim); border-radius: 6px; transition: var(--t);
+  background: none; font-family: 'DM Sans', sans-serif; cursor: pointer;
+}
+.modal-tab.active { background: var(--bg4); color: var(--text); }
+.modal-tab:focus-visible { outline: 2px solid var(--gold); }
+
+.modal-heading { font-family: 'Playfair Display', serif; font-size: 1.45rem; font-weight: 700; margin-bottom: 3px; }
+.modal-sub { font-size: 0.86rem; color: var(--muted); margin-bottom: 1.25rem; }
+
+.auth-form { display: flex; flex-direction: column; gap: 0.9rem; }
+
+.form-group { display: flex; flex-direction: column; gap: 4px; }
+.form-group label { font-size: 0.8rem; font-weight: 500; color: var(--muted); }
+
+input[type="text"], input[type="email"], input[type="password"] {
+  background: var(--bg3); border: 1px solid var(--border);
+  border-radius: var(--r); color: var(--text);
+  font-family: 'DM Sans', sans-serif; font-size: 0.92rem;
+  padding: 0.65rem 1rem; width: 100%; transition: border-color 0.2s;
+}
+input:focus { outline: none; border-color: var(--gold-b); box-shadow: 0 0 0 3px rgba(201,168,76,0.1); }
+input::placeholder { color: var(--dim); }
+
+.input-wrap { position: relative; }
+.input-wrap input { padding-right: 2.6rem; }
+.toggle-pw {
+  position: absolute; right: 0.75rem; top: 50%;
+  transform: translateY(-50%); color: var(--dim);
+  padding: 4px; transition: color 0.2s; background: none; border: none; cursor: pointer;
+}
+.toggle-pw:hover { color: var(--muted); }
+
+.checkbox-label { display: flex; align-items: flex-start; gap: 8px; font-size: 0.83rem; color: var(--muted); cursor: pointer; }
+.checkbox-label input[type="checkbox"] { width: 15px; height: 15px; flex-shrink: 0; margin-top: 2px; accent-color: var(--gold); cursor: pointer; }
+
+.auth-switch { font-size: 0.83rem; color: var(--dim); text-align: center; }
+.auth-skip { font-size: 0.78rem; text-align: center; }
+.link-btn { color: var(--gold); font-size: inherit; font-family: inherit; background: none; border: none; cursor: pointer; text-decoration: underline; text-underline-offset: 3px; padding: 0; }
+.link-btn.dim { color: var(--dim); }
+.link-btn.dim:hover { color: var(--muted); }
+.link-btn:focus-visible { outline: 2px solid var(--gold); border-radius: 2px; }
+
+/* ── TOAST ── */
+.toast {
+  position: fixed; bottom: 2rem; left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  background: var(--bg3); border: 1px solid var(--gold-b);
+  color: var(--text); font-size: 0.88rem;
+  padding: 0.7rem 1.4rem; border-radius: 40px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.3s, transform 0.3s; z-index: 2000;
+  white-space: nowrap;
+}
+.toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  .profile-grid { grid-template-columns: 1fr; }
+  .profile-left { text-align: left; flex-direction: column; align-items: flex-start; }
+  .profile-avatar { margin: 0 0 1rem; }
+  .profile-parties { justify-content: flex-start; }
+  .engagement-bar { grid-template-columns: 1fr 1fr; }
+  .opinion-block { grid-column: 1 / -1; }
+  .about-cards { grid-template-columns: 1fr; max-width: 380px; margin: 0 auto; }
+}
+@media (max-width: 640px) {
+  .nav-links { display: none; }
+  .hamburger { display: flex; }
+  .hero { padding: 4.5rem 1.25rem 3rem; }
+  .hero-heading { font-size: clamp(2.2rem, 10vw, 3.2rem); }
+  .flag-grid { grid-template-columns: repeat(2, 1fr); }
+  .engagement-bar { grid-template-columns: 1fr; }
+  .opinion-block { grid-column: unset; }
+  .footer-inner { flex-direction: column; text-align: center; }
+  .modal { padding: 1.5rem 1.1rem; }
+}
+@media (max-width: 360px) {
+  .flag-grid { grid-template-columns: 1fr; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
+
+</style>
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+<header class="navbar">
+  <div class="nav-inner">
+    <div class="nav-logo">
+      <svg width="26" height="26" viewBox="0 0 26 26" fill="none" aria-hidden="true">
+        <circle cx="13" cy="13" r="12" stroke="#C9A84C" stroke-width="1.5"/>
+        <ellipse cx="13" cy="13" rx="5.5" ry="12" stroke="#C9A84C" stroke-width="1"/>
+        <line x1="1" y1="13" x2="25" y2="13" stroke="#C9A84C" stroke-width="1"/>
+        <path d="M4 8 Q13 5 22 8" stroke="#C9A84C" stroke-width="1" fill="none"/>
+        <path d="M4 18 Q13 21 22 18" stroke="#C9A84C" stroke-width="1" fill="none"/>
+      </svg>
+      <span>Global Leaders <strong>Pulse</strong></span>
+    </div>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="#leaders" class="nav-link">Leaders</a></li>
+        <li><a href="#about" class="nav-link">About</a></li>
+        <li><button class="btn-auth" id="openLogin">Sign In</button></li>
+      </ul>
+    </nav>
+    <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="nav-mobile" id="nav-mobile" style="display:none">
+    <a href="#leaders">Leaders</a>
+    <a href="#about">About</a>
+    <button class="btn-auth" id="openLoginMobile">Sign In</button>
+  </div>
+</header>
+
+<main id="main-content">
+
+  <section class="hero">
+    <div class="hero-dots" aria-hidden="true"></div>
+    <div class="hero-content">
+      <p class="hero-eyebrow">World Politics &middot; 2025</p>
+      <h1 class="hero-heading">
+        Hop into<br/>
+        <em>interesting facts</em><br/>
+        about your favourite<br/>
+        world leader.
+      </h1>
+      <p class="hero-sub">Explore global leadership — party histories, controversies, and what the public really thinks.</p>
+      <a href="#leaders" class="btn-primary">
+        Explore Leaders
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat"><span class="stat-num">20</span><span class="stat-label">Leaders Profiled</span></div>
+      <div class="stat-div"></div>
+      <div class="stat"><span class="stat-num">6</span><span class="stat-label">Continents</span></div>
+      <div class="stat-div"></div>
+      <div class="stat"><span class="stat-num">Live</span><span class="stat-label">Public Opinion</span></div>
+    </div>
+  </section>
+
+  <section class="leaders-section" id="leaders">
+    <div class="section-header">
+      <h2>Select a Leader</h2>
+      <p>Click any flag to explore their profile, history &amp; controversy</p>
+    </div>
+    <div class="flag-grid" id="flag-grid"></div>
+  </section>
+
+  <section class="profile-section" id="profile-section" style="display:none">
+    <div class="profile-inner">
+      <button class="profile-close" id="profile-close">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        Back to leaders
+      </button>
+      <div class="profile-grid">
+        <div class="profile-left">
+          <div class="profile-avatar" id="profile-avatar"></div>
+          <span class="profile-badge" id="profile-badge">PM</span>
+          <h2 class="profile-name" id="profile-name"></h2>
+          <p class="profile-post" id="profile-post"></p>
+          <div class="profile-parties">
+            <span class="party-chip ruling" id="party-ruling"></span>
+            <span class="party-chip opp" id="party-opp"></span>
+          </div>
+          <div class="profile-meta">
+            <div class="meta-row"><span class="meta-label">In Power Since</span><span class="meta-val" id="meta-since"></span></div>
+            <div class="meta-row"><span class="meta-label">Country</span><span class="meta-val" id="meta-country"></span></div>
+          </div>
+        </div>
+        <div class="profile-right">
+          <div class="profile-tabs">
+            <button class="tab-btn active" data-tab="history">Party History</button>
+            <button class="tab-btn" data-tab="path">Path to Power</button>
+            <button class="tab-btn" data-tab="controversy">Controversy</button>
+          </div>
+          <div class="tab-panel active" id="tab-history"><p id="content-history"></p></div>
+          <div class="tab-panel" id="tab-path"><p id="content-path"></p></div>
+          <div class="tab-panel" id="tab-controversy">
+            <div class="controversy-box">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true" style="flex-shrink:0;margin-top:2px"><path d="M10 2L18 17H2L10 2Z" stroke="#C9A84C" stroke-width="1.5" fill="none"/><line x1="10" y1="8" x2="10" y2="12" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/><circle cx="10" cy="14.5" r="0.8" fill="#C9A84C"/></svg>
+              <p id="content-controversy"></p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="engagement-bar">
+        <div class="engage-block">
+          <h3>Your Vote</h3>
+          <div class="vote-btns">
+            <button class="vote-btn approve" id="btn-approve">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 9l4 4 8-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Approve
+            </button>
+            <button class="vote-btn disapprove" id="btn-disapprove">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+              Disapprove
+            </button>
+          </div>
+          <div class="approval-bar"><div class="approval-fill" id="approval-fill" style="width:50%"></div></div>
+          <div class="approval-labels">
+            <span id="approve-count">0 approve</span>
+            <span id="disapprove-count">0 disapprove</span>
+          </div>
+        </div>
+        <div class="engage-block">
+          <h3>React</h3>
+          <div class="react-btns">
+            <button class="react-btn like" id="btn-like">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M6 9V17M2 10v6a1 1 0 001 1h10.5a1 1 0 00.97-.76l1.5-6A1 1 0 0015 9h-4V5a2 2 0 00-2-2 1 1 0 00-1 1v1L6 9Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <span id="like-count">0</span>
+            </button>
+            <button class="react-btn dislike" id="btn-dislike">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M14 11V3M18 10V4a1 1 0 00-1-1H6.5a1 1 0 00-.97.76l-1.5 6A1 1 0 005 11h4v4a2 2 0 002 2 1 1 0 001-1v-1l2-4Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <span id="dislike-count">0</span>
+            </button>
+          </div>
+        </div>
+        <div class="engage-block opinion-block">
+          <h3>Your Opinion</h3>
+          <form id="opinion-form" novalidate>
+            <textarea id="opinion-text" placeholder="Share your thoughts about this leader..." rows="3" maxlength="300"></textarea>
+            <div class="opinion-footer-row">
+              <span class="char-count" id="char-count">0 / 300</span>
+              <button type="submit" class="btn-primary btn-sm">Submit</button>
+            </div>
+            <span class="field-error" id="opinion-error"></span>
+          </form>
+          <div class="opinions-list" id="opinions-list"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="about-section" id="about">
+    <div class="about-inner">
+      <h2>Why Global Leaders Pulse?</h2>
+      <p>Politics shapes our world every day. Our platform gives you factual profiles, party histories, and direct public sentiment — an unfiltered snapshot of who leads the world.</p>
+      <div class="about-cards">
+        <div class="about-card">
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true"><circle cx="16" cy="16" r="14" stroke="#C9A84C" stroke-width="1.5"/><path d="M10 22l6-12 6 12" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <h3>Verified Facts</h3>
+          <p>Every profile is built on documented, publicly available information.</p>
+        </div>
+        <div class="about-card">
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true"><rect x="4" y="8" width="24" height="18" rx="2" stroke="#C9A84C" stroke-width="1.5"/><path d="M10 14h12M10 19h8" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/></svg>
+          <h3>Party Context</h3>
+          <p>Understand the ideological roots and history behind every ruling party.</p>
+        </div>
+        <div class="about-card">
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true"><circle cx="16" cy="16" r="6" stroke="#C9A84C" stroke-width="1.5"/><path d="M16 4v4M16 24v4M4 16h4M24 16h4" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/></svg>
+          <h3>Live Sentiment</h3>
+          <p>Cast your vote, react, and read what the global community thinks.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <p class="footer-logo">Global Leaders <strong>Pulse</strong></p>
+    <p class="footer-copy">&copy; 2025 Global Leaders Pulse. All rights reserved.</p>
+  </div>
+</footer>
+
+<div class="modal-overlay" id="modal-overlay" style="display:none">
+  <div class="modal" role="dialog" aria-modal="true">
+    <button class="modal-close" id="modal-close" aria-label="Close">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M1 1l12 12M13 1L1 13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+    </button>
+    <div class="modal-tabs">
+      <button class="modal-tab active" id="tab-login-btn">Sign In</button>
+      <button class="modal-tab" id="tab-signup-btn">Create Account</button>
+    </div>
+    <form class="auth-form active" id="form-login" novalidate>
+      <h2 class="modal-heading">Welcome back</h2>
+      <p class="modal-sub">Sign in to vote and share your opinions.</p>
+      <div class="form-group">
+        <label for="login-email">Email address *</label>
+        <input type="email" id="login-email" placeholder="you@example.com" autocomplete="email"/>
+        <span class="field-error" id="login-email-err"></span>
+      </div>
+      <div class="form-group">
+        <label for="login-pw">Password *</label>
+        <div class="input-wrap">
+          <input type="password" id="login-pw" placeholder="Min. 6 characters" autocomplete="current-password"/>
+          <button type="button" class="toggle-pw" data-target="login-pw" aria-label="Show password">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M1 8s3-5 7-5 7 5 7 5-3 5-7 5-7-5-7-5Z" stroke="currentColor" stroke-width="1.2"/><circle cx="8" cy="8" r="2" stroke="currentColor" stroke-width="1.2"/></svg>
+          </button>
+        </div>
+        <span class="field-error" id="login-pw-err"></span>
+      </div>
+      <button type="submit" class="btn-primary btn-full">Sign In</button>
+      <p class="auth-switch">No account? <button type="button" class="link-btn" id="go-signup">Create one</button></p>
+      <p class="auth-skip"><button type="button" class="link-btn dim" id="skip-login">Continue without signing in</button></p>
+    </form>
+    <form class="auth-form" id="form-signup" novalidate style="display:none">
+      <h2 class="modal-heading">Join the Pulse</h2>
+      <p class="modal-sub">Create your account to start voting.</p>
+      <div class="form-group">
+        <label for="su-name">Full name *</label>
+        <input type="text" id="su-name" placeholder="Your full name" autocomplete="name"/>
+        <span class="field-error" id="su-name-err"></span>
+      </div>
+      <div class="form-group">
+        <label for="su-email">Email address *</label>
+        <input type="email" id="su-email" placeholder="you@example.com" autocomplete="email"/>
+        <span class="field-error" id="su-email-err"></span>
+      </div>
+      <div class="form-group">
+        <label for="su-pw">Password *</label>
+        <div class="input-wrap">
+          <input type="password" id="su-pw" placeholder="Min. 6 characters" autocomplete="new-password"/>
+          <button type="button" class="toggle-pw" data-target="su-pw" aria-label="Show password">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M1 8s3-5 7-5 7 5 7 5-3 5-7 5-7-5-7-5Z" stroke="currentColor" stroke-width="1.2"/><circle cx="8" cy="8" r="2" stroke="currentColor" stroke-width="1.2"/></svg>
+          </button>
+        </div>
+        <span class="field-error" id="su-pw-err"></span>
+      </div>
+      <div class="form-group">
+        <label for="su-confirm">Confirm password *</label>
+        <input type="password" id="su-confirm" placeholder="Re-enter password" autocomplete="new-password"/>
+        <span class="field-error" id="su-confirm-err"></span>
+      </div>
+      <div class="form-group">
+        <label class="checkbox-label"><input type="checkbox" id="su-terms"/> I agree to the Terms &amp; Conditions</label>
+        <span class="field-error" id="su-terms-err"></span>
+      </div>
+      <button type="submit" class="btn-primary btn-full">Create Account</button>
+      <p class="auth-switch">Have an account? <button type="button" class="link-btn" id="go-login">Sign in</button></p>
+      <p class="auth-skip"><button type="button" class="link-btn dim" id="skip-signup">Continue without signing in</button></p>
+    </form>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+'use strict';
+
+/* ══════════════════════════════════════════
+   LEADER DATA — 20 Countries
+══════════════════════════════════════════ */
+const leaders = {
+  usa: {
+    name: 'Donald Trump', post: '47th President of the United States',
+    badge: 'POTUS', country: 'United States', since: 'January 2025',
+    ruling: 'Republican Party', opposition: 'Democratic Party',
+    flagSvg: `<svg viewBox="0 0 60 40" class="flag-svg"><rect width="60" height="40" fill="#B22234"/><rect y="3.1" width="60" height="3.1" fill="#fff"/><rect y="9.2" width="60" height="3.1" fill="#fff"/><rect y="15.4" width="60" height="3.1" fill="#fff"/><rect y="21.5" width="60" height="3.1" fill="#fff"/><rect y="27.7" width="60" height="3.1" fill="#fff"/><rect y="33.8" width="60" height="3.1" fill="#fff"/><rect width="24" height="21.5" fill="#3C3B6E"/><g fill="#fff"><circle cx="2.5" cy="2" r="1"/><circle cx="6.5" cy="2" r="1"/><circle cx="10.5" cy="2" r="1"/><circle cx="14.5" cy="2" r="1"/><circle cx="18.5" cy="2" r="1"/><circle cx="4.5" cy="4.5" r="1"/><circle cx="8.5" cy="4.5" r="1"/><circle cx="12.5" cy="4.5" r="1"/><circle cx="16.5" cy="4.5" r="1"/><circle cx="20.5" cy="4.5" r="1"/><circle cx="2.5" cy="7" r="1"/><circle cx="6.5" cy="7" r="1"/><circle cx="10.5" cy="7" r="1"/><circle cx="14.5" cy="7" r="1"/><circle cx="18.5" cy="7" r="1"/><circle cx="4.5" cy="9.5" r="1"/><circle cx="8.5" cy="9.5" r="1"/><circle cx="12.5" cy="9.5" r="1"/><circle cx="16.5" cy="9.5" r="1"/><circle cx="20.5" cy="9.5" r="1"/><circle cx="2.5" cy="12" r="1"/><circle cx="6.5" cy="12" r="1"/><circle cx="10.5" cy="12" r="1"/><circle cx="14.5" cy="12" r="1"/><circle cx="18.5" cy="12" r="1"/><circle cx="4.5" cy="14.5" r="1"/><circle cx="8.5" cy="14.5" r="1"/><circle cx="12.5" cy="14.5" r="1"/><circle cx="16.5" cy="14.5" r="1"/><circle cx="2.5" cy="17" r="1"/><circle cx="6.5" cy="17" r="1"/><circle cx="10.5" cy="17" r="1"/><circle cx="14.5" cy="17" r="1"/><circle cx="18.5" cy="17" r="1"/></g></svg>`,
+    history: 'The Republican Party, founded in 1854 as an anti-slavery coalition, became one of America\'s two dominant parties. By the 20th century it championed low taxes, limited government, and a strong military. Under Trump\'s first term (2017-2021) the party shifted toward economic nationalism and populism — a direction he continues in his second term beginning 2025.',
+    path: 'Trump rose through real-estate entrepreneurship and reality TV before entering politics. His 2016 presidential run — built on anti-establishment messaging — shocked global observers. After losing in 2020, he became the first former president convicted of felony charges, yet secured the 2024 Republican nomination and won the general election, returning to the White House in January 2025.',
+    controversy: 'Trump faced two impeachments — one over a Ukraine phone call (acquitted 2020) and another over the January 6 Capitol riot (acquitted 2021). In 2024 he became the first US president convicted of a crime, found guilty on 34 felony counts related to falsified business records. He continues to dispute the 2020 election results.'
+  },
+  uk: {
+    name: 'Keir Starmer', post: 'Prime Minister of the United Kingdom',
+    badge: 'PM', country: 'United Kingdom', since: 'July 2024',
+    ruling: 'Labour Party', opposition: 'Conservative Party',
+    flagSvg: `<svg viewBox="0 0 60 40" class="flag-svg"><rect width="60" height="40" fill="#012169"/><path d="M0 0 L60 40 M60 0 L0 40" stroke="#fff" stroke-width="8"/><path d="M0 0 L60 40 M60 0 L0 40" stroke="#C8102E" stroke-width="5"/><path d="M30 0 V40 M0 20 H60" stroke="#fff" stroke-width="12"/><path d="M30 0 V40 M0 20 H60" stroke="#C8102E" stroke-width="7"/></svg>`,
+    history: 'The Labour Party, founded in 1900 from trade union and socialist movements, governed the UK through historic expansions of the welfare state. After 14 years in opposition, Labour returned to power in 2024 under Starmer, who had repositioned the party toward the political centre following the turbulent Corbyn era.',
+    path: 'Starmer was a human-rights barrister and Director of Public Prosecutions (2008-2013) before entering Parliament in 2015. He won the Labour leadership in 2020 and led a methodical campaign strategy focused on trust and stability, delivering Labour\'s first general election victory since 2005.',
+    controversy: 'Starmer was criticised over failures to prosecute the grooming gang scandal in Rotherham during his tenure as Director of Public Prosecutions — a charge he denies. He also faced backlash over his handling of internal antisemitism investigations during the Corbyn years when he served in the shadow cabinet.'
+  },
+  india: {
+    name: 'Narendra Modi', post: 'Prime Minister of India',
+    badge: 'PM', country: 'India', since: 'May 2014',
+    ruling: 'Bharatiya Janata Party (BJP)', opposition: 'Indian National Congress (INC)',
+    flagSvg: `<svg viewBox="0 0 60 40" class="flag-svg"><rect width="60" height="40" fill="#fff"/><rect width="60" height="13.3" fill="#FF9933"/><rect y="26.7" width="60" height="13.3" fill="#138808"/><circle cx="30" cy="20" r="5.5" fill="none" stroke="#000080" stroke-width="1"/><circle cx="30" cy="20" r="1" fill="#000080"/><g stroke="#000080" stroke-width="0.5"><line x1="30" y1="14.5" x2="30" y2="25.5"/><line x1="24.5" y1="20" x2="35.5" y2="20"/><line x1="26.1" y1="15.6" x2="33.9" y2="24.4"/><line x1="26.1" y1="24.4" x2="33.9" y2="15.6"/></g></svg>`,
+    history: 'The BJP was founded in 1980, rooted in Hindu nationalist ideology (Hindutva). Under Modi, the BJP became India\'s most dominant party since Congress\'s heyday, winning massive parliamentary majorities in 2014 and 2019. It lost its outright majority in 2024 and now governs in coalition.',
+    path: 'Modi grew up in Gujarat, becoming a full-time RSS activist in his youth. He rose through BJP ranks to become Chief Minister of Gujarat (2001-2014). His 2014 campaign swept the BJP to power. He won re-election in 2019 with an even larger majority, making him one of the most powerful Indian leaders in decades.',
+    controversy: 'The 2002 Gujarat riots, in which over 1,000 people (mostly Muslims) were killed, remain the defining controversy of Modi\'s career. Courts cleared him of direct involvement but critics argue state authorities were complicit. The Citizenship Amendment Act (2019) and farm-law protests (2020-21) drew mass demonstrations and international scrutiny.'
+  },
+  france: {
+    name: 'Emmanuel Macron', post: 'President of France',
+    badge: 'PRES', country: 'France', since: 'May 2017',
+    ruling: 'Renaissance (En Marche!)', opposition: 'Rassemblement National (RN)',
+    flagSvg: `<svg viewBox="0 0 60 40" class="flag-svg"><rect width="60" height="40" fill="#EF4135"/><rect width="40" height="40" fill="#fff"/><rect width="20" height="40" fill="#002395"/></svg>`,
+    history: 'Macron founded En Marche! in 2016 as a centrist, pro-European movement bypassing traditional left-right divides. Renamed Renaissance, the party became dominant in the National Assembly but lost its outright majority after the 2022 elections, facing powerful challenges from the far-right RN.',
+    path: 'A graduate of Sciences Po and ENA, Macron worked at Rothschild as an investment banker before becoming Economy Minister (2014-2016) under Hollande. His meteoric rise — from founding a political movement to winning the Elysee in just one year — was unprecedented in French political history. He won re-election in 2022 against Marine Le Pen.',
+    controversy: 'Macron\'s 2023 pension reform — raising the retirement age from 62 to 64 — triggered the longest wave of strikes in France in decades. He invoked Article 49.3 to pass the bill without a parliamentary vote, which critics called anti-democratic. His handling of Yellow Vest protests in 2018-2019 was also widely criticised.'
+  },
+  germany: {
+    name: 'Friedrich Merz', post: 'Federal Chancellor of Germany',
+    badge: 'CHANCELLOR', country: 'Germany', since: 'March 2025',
+    ruling: 'Christian Democratic Union (CDU)', opposition: 'SPD / AfD',
+    flagSvg: `<svg viewBox="0 0 60 40" class="flag-svg"><rect width="60" height="40" fill="#FFCE00"/><rect width="60" height="26.7" fill="#DD0000"/><rect width="60" height="13.3" fill="#000"/></svg>`,
+    history: 'The CDU was founded in 1945 as a broad Christian-democratic, centre-right coalition. It governed Germany for much of the post-war era under Adenauer and Helmut Kohl. The party lost power in 2021 but returned to leadership in 2025 after winning the February federal election, forming a coalition with the SPD.',
+    path: 'Friedrich Merz is a corporate lawyer and former BlackRock Germany chairman. He twice lost the CDU leadership before finally winning it in 2022. He positioned himself as a clear ideological contrast to Merkel\'s centrist pragmatism, championing fiscal conservatism and tighter migration controls. The CDU\'s 2025 election victory made him Chancellor.',
+    controversy: 'Merz drew fierce criticism when he accepted votes from the far-right Alternative for Germany (AfD) to pass a migration motion in the Bundestag in early 2025, breaking a longstanding political taboo. Opponents called it a normalisation of the far-right; Merz defended it as necessary pragmatism.'
+  },
+  japan: {
+    name: 'Shigeru Ishiba', post: 'Prime Minister of Japan',
+    badge: 'PM', country: 'Japan', since: 'October 2024',
+    ruling: 'Liberal Democratic Party (LDP)', opposition: 'Constitutional Democratic Party',
+    flagSvg: `<svg viewBox="0 0 60 40" class="flag-svg"><rect width="60" height="40" fill="#fff"/><circle cx="30" cy="20" r="12" fill="#BC002D"/></svg>`,
+    history: 'The LDP has governed Japan almost continuously since 1955, blending conservative values, US-alliance security policy, and export-led economic management. Its dominance was shaken by the 2024 slush-fund scandal that implicated dozens of its MPs, costing former PM Kishida his position.',
+    path: 'Ishiba is a former banker turned politician known as a defence policy expert. He served as Defence Minister twice and ran for LDP leadership multiple times before winning in September 2024. He became PM in October 2024 but immediately called a snap election — which the LDP lost its supermajority in.',
+    controversy: 'Ishiba inherited the fallout from the LDP\'s massive political-funds scandal, in which dozens of MPs under-reported donations, creating off-the-books slush funds. The scandal led to unprecedented prosecution of sitting LDP parliamentarians. Managing this fallout has dominated his time in office.'
+  },
+  canada: {
+    name: 'Mark Carney', post: 'Prime Minister of Canada',
+    badge: 'PM', country: 'Canada', since: 'March 2025',
+    ruling: 'Liberal Party of Canada', opposition: 'Conservative Party of Canada',
+    flagSvg: `<svg viewBox="0 0 60 40" class="flag-svg"><rect width="60" height="40" fill="#fff"/><rect width="15" height="40" fill="#FF0000"/><rect x="45" width="15" height="40" fill="#FF0000"/><path d="M30 8 L32 14 L38 13 L34 19 L37 27 L30 23 L23 27 L26 19 L22 13 L28 14 Z" fill="#FF0000"/></svg>`,
+    history: 'The Liberal Party, one of Canada\'s oldest parties (founded 1867), champions individual rights, multiculturalism, and activist government. After Trudeau\'s decade in power, the party faced historic low polling, prompting Trudeau\'s resignation and Carney\'s emergence as the new leader in 2025.',
+    path: 'Mark Carney is a Harvard- and Oxford-educated economist who served as Governor of the Bank of Canada (2008-2013) and Governor of the Bank of England (2013-2020), the first non-Briton to hold the role. He won the Liberal leadership in March 2025 and led the party to a federal election victory.',
+    controversy: 'Carney has faced criticism for his career at Brookfield Asset Management, where he was vice-chairman while serving as UN Special Envoy on Climate Action, raising conflict-of-interest concerns. Critics argue his corporate ties undermine his climate-finance credentials. His political inexperience is a frequent target of opponents.'
+  },
+  brazil: {
+    name: 'Luiz Inacio Lula da Silva', post: 'President of Brazil (3rd Term)',
+    badge: 'PRES', country: 'Brazil', since: 'January 2023',
+    ruling: "Workers' Party (PT)", opposition: "Liberal Party (PL)",
+    flagSvg: `<svg viewBox="0 0 60 40" class="flag-svg"><rect width="60" height="40" fill="#009c3b"/><polygon points="30,4 56,20 30,36 4,20" fill="#FEDD00"/><circle cx="30" cy="20" r="9" fill="#002776"/><path d="M22 18 Q30 14 38 18" stroke="#fff" stroke-width="1.5" fill="none"/></svg>`,
+    history: 'The PT was founded in 1980 by trade unionists, intellectuals, and social movements as a democratic socialist alternative during Brazil\'s military dictatorship. The party governed Brazil from 2003 to 2016, overseeing significant economic growth and poverty reduction, but was damaged by the massive Lava Jato corruption scandal.',
+    path: 'Lula left school at age 10 to work and lost a finger in a factory accident. He became a metalworkers\' union leader and was imprisoned under military rule. His first two terms (2003-2010) lifted 36 million Brazilians out of poverty. Convicted in 2018 in the Lava Jato investigation but his convictions were later annulled, he won the 2022 election.',
+    controversy: 'The Lava Jato corruption convictions — later annulled on procedural grounds — remain deeply controversial. Supporters call them political persecution; critics believe he benefited from corruption linked to the PT. Lula has also faced criticism for slow climate action in the Amazon despite earlier pledges.'
+  },
+  southafrica: {
+    name: 'Cyril Ramaphosa', post: 'President of South Africa',
+    badge: 'PRES', country: 'South Africa', since: 'February 2018',
+    ruling: 'African National Congress (ANC)', opposition: 'Democratic Alliance (DA)',
+    flagSvg: `<svg viewBox="0 0 60 40" class="flag-svg"><rect width="60" height="40" fill="#007A4D"/><rect y="13" width="60" height="14" fill="#FFB612"/><rect y="16" width="60" height="8" fill="#fff"/><polygon points="0,0 0,40 26,20" fill="#000"/><polygon points="0,2 0,38 23,20" fill="#007A4D"/><polygon points="0,16 0,24 12,20" fill="#FFB612"/><rect y="0" width="60" height="6" fill="#DE3831"/><rect y="34" width="60" height="6" fill="#002395"/></svg>`,
+    history: 'The ANC, founded in 1912, led the anti-apartheid struggle and has governed South Africa since the first democratic elections in 1994. Over 30 years in power it has been marred by corruption and state capture under Jacob Zuma. In the 2024 election the ANC fell below 50% for the first time, forcing it into a Government of National Unity.',
+    path: 'Ramaphosa was a trade union leader who co-founded the National Union of Mineworkers before becoming one of South Africa\'s constitutional negotiators. He became a billionaire businessman before re-entering politics as Zuma\'s deputy. He ousted Zuma in an ANC internal vote in 2018 and was inaugurated as president, vowing to root out corruption.',
+    controversy: 'The "Farmgate" scandal erupted in 2022 when a former intelligence chief alleged Ramaphosa had hidden US$4 million in cash at his game farm and then covered up the theft. A parliamentary inquiry recommended impeachment proceedings. He survived after the ANC rallied around him, but the scandal severely damaged his anti-corruption image.'
+  },
+  australia: {
+    name: 'Anthony Albanese', post: 'Prime Minister of Australia',
+    badge: 'PM', country: 'Australia', since: 'May 2022',
+    ruling: 'Australian Labor Party (ALP)', opposition: 'Liberal-National Coalition',
+    flagSvg: `<svg viewBox="0 0 60 40" class="flag-svg"><rect width="60" height="40" fill="#00008B"/><path d="M0 0 L30 20 M30 0 L0 20" stroke="#fff" stroke-width="4"/><path d="M0 0 L30 20 M30 0 L0 20" stroke="#C8102E" stroke-width="2.5"/><path d="M15 0 V20 M0 10 H30" stroke="#fff" stroke-width="6"/><path d="M15 0 V20 M0 10 H30" stroke="#C8102E" stroke-width="3.5"/><g fill="#fff"><circle cx="50" cy="30" r="1.5"/><circle cx="55" cy="26" r="1.5"/><circle cx="53" cy="34" r="1.5"/><circle cx="47" cy="33" r="1.5"/><circle cx="43" cy="25" r="1.5"/></g></svg>`,
+    history: 'The ALP, founded in 1891, is one of the world\'s oldest labour parties. Under Albanese, Labor returned to government after nine years in opposition, promising action on climate change, affordable housing, and Indigenous recognition. Labor retained government in the 2025 federal election with an increased majority.',
+    path: 'Albanese grew up in public housing in Sydney, raised by a single mother on a disability pension. He entered Parliament in 1996 and served as Infrastructure Minister and Deputy Prime Minister under Rudd and Gillard. His disciplined 2022 campaign unseated the Morrison government. He was re-elected in 2025.',
+    controversy: 'The October 2023 Indigenous Voice to Parliament referendum — Albanese\'s signature reform — was defeated 60%-40%, a significant political setback. Critics argued the government failed to explain the policy clearly. The defeat left Indigenous affairs policy adrift and damaged Albanese\'s standing heading into 2024.'
+  },
+  russia: {
+    name: 'Vladimir Putin', post: 'President of Russia',
+    badge: 'PRES', country: 'Russia', since: 'May 2000',
+    ruling: 'United Russia', opposition: 'Communist Party (nominal)',
+    flagSvg: `<svg viewBox="0 0 60 40" class="flag-svg"><rect width="60" height="40" fill="#D52B1E"/><rect width="60" height="26.7" fill="#0039A6"/><rect width="60" height="13.3" fill="#fff"/></svg>`,
+    history: 'United Russia was founded in 2001 as a vehicle for Putin\'s political dominance. It holds a supermajority in the Duma but functions more as a bureaucratic structure than an ideological party. Real opposition parties are systematically suppressed, imprisoned, or forced into exile, making Russia effectively a one-party authoritarian state.',
+    path: 'Putin served as a KGB intelligence officer for 16 years before entering politics under Boris Yeltsin. He became Prime Minister in 1999 and was then appointed acting president on New Year\'s Eve 1999. He has dominated Russian politics ever since through two presidential terms, a period as prime minister, and two further presidential terms — now extended potentially until 2036.',
+    controversy: 'Putin ordered the full-scale invasion of Ukraine in February 2022, triggering the largest war in Europe since World War II and causing hundreds of thousands of casualties. The International Criminal Court issued an arrest warrant for him in 2023 over the deportation of Ukrainian children. Critics also point to the poisoning and imprisonment of opposition leader Alexei Navalny, who died in custody in 2024.'
+  },
+  china: {
+    name: 'Xi Jinping', post: 'President & General Secretary of the CPC',
+    badge: 'PRES', country: 'China', since: 'March 2013',
+    ruling: 'Chinese Communist Party (CPC)', opposition: 'No legal opposition',
+    flagSvg: `<svg viewBox="0 0 60 40" class="flag-svg"><rect width="60" height="40" fill="#DE2910"/><g fill="#FFDE00"><polygon points="8,4 9.5,8.5 6,5.5 10,5.5 6.5,8.5" transform="scale(1.4) translate(1,1)"/><polygon points="16,2 17,4 15,3 17,3 15,4" transform="scale(1) translate(6,4)"/><polygon points="20,4 21,6 19,5 21,5 19,6" transform="scale(1) translate(4,4)"/><polygon points="20,8 21,10 19,9 21,9 19,10" transform="scale(1) translate(4,0)"/><polygon points="16,10 17,12 15,11 17,11 15,12" transform="scale(1) translate(6,-2)"/></g></svg>`,
+    history: 'The Chinese Communist Party has ruled China since 1949. Under Mao Zedong it pursued radical collectivisation and the Cultural Revolution. After Deng Xiaoping\'s reforms the party oversaw extraordinary economic growth while maintaining political authoritarianism. Xi Jinping has since reversed Deng\'s norm of collective leadership, concentrating power unprecedented since Mao.',
+    path: 'Xi Jinping was sent to rural Shaanxi during the Cultural Revolution as a teenager. He rose through provincial party positions in Fujian, Zhejiang, and Shanghai before joining the Politburo Standing Committee in 2007. He became General Secretary and President in 2012-2013. In 2018, the constitution was amended to remove presidential term limits, enabling his indefinite rule.',
+    controversy: 'Xi has overseen the mass detention of over one million Uyghurs and other Muslim minorities in Xinjiang in what the UN described as potentially constituting crimes against humanity. He has eliminated political rivals through an anti-corruption campaign widely seen as consolidating personal power. His aggressive stance toward Taiwan and crackdown on Hong Kong\'s democracy movement have also drawn global condemnation.'
+  },
+  turkey: {
+    name: 'Recep Tayyip Erdogan', post: 'President of Turkey',
+    badge: 'PRES', country: 'Turkey', since: 'August 2014',
+    ruling: 'Justice and Development Party (AKP)', opposition: 'Republican People\'s Party (CHP)',
+    flagSvg: `<svg viewBox="0 0 60 40" class="flag-svg"><rect width="60" height="40" fill="#E30A17"/><circle cx="22" cy="20" r="9" fill="#fff"/><circle cx="25" cy="20" r="7" fill="#E30A17"/><polygon points="31,20 36,17 36,23" fill="#fff" transform="rotate(18 33 20)"/></svg>`,
+    history: 'The AKP was founded in 2001 from the remnants of the Islamist Welfare Party. It initially presented itself as a moderate, pro-EU conservative party and won a landslide in 2002. Over time it shifted toward Islamist nationalism and authoritarianism, systematically weakening Turkey\'s secular institutions, judiciary, and press freedom.',
+    path: 'Erdogan was Mayor of Istanbul (1994-1998) before being jailed for reciting an Islamist poem. After founding the AKP he became Prime Minister in 2003, serving until 2014, then transitioning to a powerful executive presidency following a 2017 constitutional referendum. He survived a military coup attempt in July 2016 which he used to purge over 150,000 people from public institutions.',
+    controversy: 'After the 2016 coup attempt, Erdogan conducted sweeping purges of the military, judiciary, academia, and media, imprisoning more journalists than any other country for several consecutive years. His government jailed opposition leaders including Ekrem Imamoglu, the popular Istanbul mayor, on disputed charges seen widely as politically motivated. Turkey\'s democracy index has declined sharply under his rule.'
+  },
+  italy: {
+    name: 'Giorgia Meloni', post: 'Prime Minister of Italy',
+    badge: 'PM', country: 'Italy', since: 'October 2022',
+    ruling: "Brothers of Italy (Fratelli d'Italia)", opposition: 'Democratic Party (PD)',
+    flagSvg: `<svg viewBox="0 0 60 40" class="flag-svg"><rect width="60" height="40" fill="#CE2B37"/><rect width="40" height="40" fill="#fff"/><rect width="20" height="40" fill="#009246"/></svg>`,
+    history: "Brothers of Italy traces its roots to the post-fascist Italian Social Movement (MSI) founded in 1946. Meloni rebranded the party with a flame logo echoing the MSI's symbol and a softer image, distancing it from explicit neo-fascism while maintaining nationalist, anti-immigration, and socially conservative positions. It became Italy's largest party in 2022.",
+    path: 'Meloni became the youngest person ever appointed to the Italian cabinet at age 31 in 2008. She co-founded Brothers of Italy in 2012 and led it from 4% in polls to becoming the largest party in Italy. She became Prime Minister in October 2022, leading a right-wing coalition government and the first woman to hold the office.',
+    controversy: 'Meloni has been criticised for her government\'s hardline anti-immigration policies, including deals with Tunisia and Libya to stop migrants crossing the Mediterranean — policies human rights groups say put lives at risk. Her roots in post-fascist politics and the inclusion of far-right figures in her coalition remain controversial. She has also clashed with EU institutions on several issues.'
+  },
+  argentina: {
+    name: 'Javier Milei', post: 'President of Argentina',
+    badge: 'PRES', country: 'Argentina', since: 'December 2023',
+    ruling: 'La Libertad Avanza (LLA)', opposition: 'Peronist Union (UP)',
+    flagSvg: `<svg viewBox="0 0 60 40" class="flag-svg"><rect width="60" height="40" fill="#74ACDF"/><rect y="13.3" width="60" height="13.3" fill="#fff"/><circle cx="30" cy="20" r="5" fill="#F6B40E"/><g stroke="#F6B40E" stroke-width="0.8"><line x1="30" y1="13" x2="30" y2="11"/><line x1="30" y1="27" x2="30" y2="29"/><line x1="23" y1="20" x2="21" y2="20"/><line x1="37" y1="20" x2="39" y2="20"/></g></svg>`,
+    history: "La Libertad Avanza was founded by Milei in 2021 as a libertarian, anarcho-capitalist political force. It advocates for radical free-market reforms, elimination of the central bank, dollarisation of the economy, and massive cuts to public spending. It rose from obscurity to winning the presidency in just three years, capitalising on Argentina's severe economic crisis.",
+    path: 'Milei is an economist and television personality known for his wild hair and aggressive rhetorical style. He used media appearances and social media to build a following before entering Congress in 2021. Running on a platform of wielding a political "chainsaw" against the state, he defeated the Peronist candidate in a historic 2023 runoff election by 11 points.',
+    controversy: 'Milei\'s shock therapy economic reforms — eliminating dozens of government ministries, mass layoffs of public workers, and currency devaluation — triggered a spike in poverty rates that exceeded 50% in early 2024 before beginning to recover. His abrasive personality, praise of Argentina\'s military dictatorship, and erratic diplomatic behaviour (including attacking the Pope) have generated significant controversy.'
+  },
+  southkorea: {
+    name: 'Lee Jae-myung', post: 'President of South Korea',
+    badge: 'PRES', country: 'South Korea', since: 'June 2025',
+    ruling: 'Democratic Party of Korea (DP)', opposition: 'People Power Party (PPP)',
+    flagSvg: `<svg viewBox="0 0 60 40" class="flag-svg"><rect width="60" height="40" fill="#fff"/><circle cx="30" cy="20" r="9" fill="none"/><path d="M21 14 Q30 20 39 14" stroke="#CD2E3A" stroke-width="6" fill="none"/><path d="M21 26 Q30 20 39 26" stroke="#003478" stroke-width="6" fill="none"/><g stroke="#000" stroke-width="1.5"><line x1="10" y1="8" x2="16" y2="14"/><line x1="12" y1="6" x2="18" y2="12"/><line x1="8" y1="10" x2="14" y2="16"/><line x1="44" y1="8" x2="50" y2="14"/><line x1="46" y1="6" x2="52" y2="12"/><line x1="42" y1="10" x2="48" y2="16"/><line x1="10" y1="32" x2="16" y2="26"/><line x1="12" y1="34" x2="18" y2="28"/><line x1="8" y1="30" x2="14" y2="24"/><line x1="44" y1="32" x2="50" y2="26"/><line x1="42" y1="30" x2="48" y2="24"/><line x1="46" y1="34" x2="52" y2="28"/></g></svg>`,
+    history: 'The Democratic Party of Korea is a centre-left liberal party that has alternated power with the conservative PPP. It is associated with the legacy of the Sunshine Policy toward North Korea, labour rights, and social welfare expansion. The party returned to the presidency in 2025 after the impeachment crisis surrounding Yoon Suk-yeol.',
+    path: 'Lee Jae-myung grew up in poverty, working in a factory from age 13 before putting himself through law school. He became governor of Gyeonggi province and a prominent progressive politician. After narrowly losing the 2022 presidential election, he won the 2025 snap election following the constitutional crisis triggered by Yoon\'s short-lived declaration of martial law.',
+    controversy: 'Lee himself faces multiple ongoing criminal trials on charges including bribery, election law violations, and perjury — charges he calls political persecution. He was the first presidential candidate to be elected while facing active criminal indictments. His legal battles are expected to be a defining feature of his presidency.'
+  },
+  mexico: {
+    name: 'Claudia Sheinbaum', post: 'President of Mexico',
+    badge: 'PRES', country: 'Mexico', since: 'October 2024',
+    ruling: 'MORENA (National Regeneration Movement)', opposition: 'PAN / PRI coalition',
+    flagSvg: `<svg viewBox="0 0 60 40" class="flag-svg"><rect width="60" height="40" fill="#CE1126"/><rect width="40" height="40" fill="#fff"/><rect width="20" height="40" fill="#006847"/><circle cx="30" cy="20" r="7" fill="none" stroke="#8B4513" stroke-width="0.5"/><text x="30" y="24" text-anchor="middle" font-size="9" fill="#8B4513">&#127807;</text></svg>`,
+    history: 'MORENA was founded by Andres Manuel Lopez Obrador (AMLO) in 2014 as a left-wing populist movement. It swept to power in 2018 with AMLO\'s landslide victory and consolidated its position with Sheinbaum\'s 2024 election win. The party advocates social welfare programs, national sovereignty over resources, and an anti-corruption agenda, though critics question its democratic credentials.',
+    path: 'Claudia Sheinbaum is a climate scientist with a PhD from UC Berkeley, who served as Head of Government of Mexico City (2018-2023). She was the first scientist and first woman to lead a major Mexican party. Her 2024 presidential campaign won with 59% of the vote — the largest margin in modern Mexican electoral history — making her Mexico\'s first female president.',
+    controversy: 'Sheinbaum has faced criticism for continuing and deepening AMLO\'s controversial judicial reform, which replaced the appointed judiciary with popularly elected judges — a move critics say undermines judicial independence and threatens the rule of law. Security concerns in cartel-dominated regions persist, and her close ideological alignment with her predecessor raises questions about policy continuity and democratic norms.'
+  },
+  indonesia: {
+    name: 'Prabowo Subianto', post: 'President of Indonesia',
+    badge: 'PRES', country: 'Indonesia', since: 'October 2024',
+    ruling: 'Gerindra Party', opposition: 'PDI-P (Indonesian Democracy Party)',
+    flagSvg: `<svg viewBox="0 0 60 40" class="flag-svg"><rect width="60" height="40" fill="#fff"/><rect width="60" height="20" fill="#CE1126"/></svg>`,
+    history: 'Gerindra (Great Indonesia Movement Party) was founded in 2008 by Prabowo Subianto as a nationalist, right-leaning populist party. It combines economic nationalism, strong military values, and anti-corruption rhetoric. The party has grown steadily and now leads a broad governing coalition that controls a supermajority in parliament.',
+    path: 'Prabowo is a former Special Forces commander and son-in-law of dictator Suharto. He twice lost presidential elections (2014 and 2019) to Joko Widodo before serving as Defence Minister (2019-2024) in Widodo\'s cabinet. His 2024 presidential run — with Widodo\'s son as running mate — won with 58% of the vote, a decisive victory after three attempts.',
+    controversy: 'Prabowo was discharged from the Indonesian military in 1998 amid allegations of involvement in the kidnapping and torture of student activists during the final days of the Suharto regime — charges for which he was never tried. His human rights record from the 1990s remains a major source of controversy, as does the perceived nepotism of running alongside the outgoing president\'s son.'
+  },
+  nigeria: {
+    name: 'Bola Tinubu', post: 'President of Nigeria',
+    badge: 'PRES', country: 'Nigeria', since: 'May 2023',
+    ruling: 'All Progressives Congress (APC)', opposition: "People's Democratic Party (PDP)",
+    flagSvg: `<svg viewBox="0 0 60 40" class="flag-svg"><rect width="60" height="40" fill="#fff"/><rect width="20" height="40" fill="#008751"/><rect x="40" width="20" height="40" fill="#008751"/></svg>`,
+    history: 'The APC was formed in 2013 as a merger of several opposition parties to challenge the long-dominant PDP. It came to power in 2015 when Muhammadu Buhari defeated the incumbent president — Nigeria\'s first peaceful democratic transfer of power between parties. The APC has struggled to deliver on its promises of economic development and security improvement.',
+    path: 'Bola Tinubu is a wealthy Lagos politician who served as Governor of Lagos State (1999-2007), transforming the state\'s finances. Known as the "Godfather of Lagos," he built a vast political network over three decades. His 2023 presidential victory — though contested by opponents — was upheld by the Supreme Court after a prolonged legal battle.',
+    controversy: 'Tinubu\'s immediate removal of the fuel subsidy upon taking office triggered a massive spike in petrol prices and inflation, causing widespread hardship. His educational credentials have been contested, with allegations his University of Chicago diploma was forged. A 1993 US drug money forfeiture case from Chicago also remains a source of scrutiny. His narrow election victory and the legal challenges to its validity cast a shadow over his legitimacy.'
+  }
+};
+
+/* ══════════════════════════════════════════
+   STATE
+══════════════════════════════════════════ */
+const state = {
+  current: null,
+  votes: {},
+  reactions: {},
+  opinions: {}
+};
+
+Object.keys(leaders).forEach(id => {
+  state.votes[id]     = { approve: Math.floor(Math.random()*300+80), disapprove: Math.floor(Math.random()*150+30), userVote: null };
+  state.reactions[id] = { likes: Math.floor(Math.random()*200+40), dislikes: Math.floor(Math.random()*80+10), userReaction: null };
+  state.opinions[id]  = [];
+});
+
+/* ══════════════════════════════════════════
+   HELPERS
+══════════════════════════════════════════ */
+function byId(id) { return document.getElementById(id); }
+function escHtml(s) { return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+let toastTimer;
+function showToast(msg) {
+  const t = byId('toast');
+  clearTimeout(toastTimer);
+  t.textContent = msg;
+  t.classList.add('show');
+  toastTimer = setTimeout(() => t.classList.remove('show'), 3000);
+}
+
+/* ══════════════════════════════════════════
+   BUILD FLAG GRID
+══════════════════════════════════════════ */
+function buildGrid() {
+  const grid = byId('flag-grid');
+  grid.innerHTML = '';
+  Object.entries(leaders).forEach(([id, l]) => {
+    const btn = document.createElement('button');
+    btn.className = 'flag-card';
+    btn.type = 'button';
+    btn.setAttribute('data-id', id);
+    btn.setAttribute('aria-label', l.country + ' — ' + l.name);
+    btn.innerHTML = `
+      <div class="flag-wrap">${l.flagSvg}</div>
+      <div>
+        <span class="flag-country">${l.country}</span>
+        <span class="flag-leader">${l.name}</span>
+      </div>`;
+    btn.addEventListener('click', () => openProfile(id));
+    grid.appendChild(btn);
+  });
+}
+
+/* ══════════════════════════════════════════
+   OPEN PROFILE
+══════════════════════════════════════════ */
+function openProfile(id) {
+  const l = leaders[id];
+  if (!l) return;
+  state.current = id;
+
+  /* Populate left column */
+  const initials = l.name.split(' ').map(w => w[0]).join('').slice(0,2).toUpperCase();
+  byId('profile-avatar').textContent = initials;
+  byId('profile-badge').textContent  = l.badge;
+  byId('profile-name').textContent   = l.name;
+  byId('profile-post').textContent   = l.post;
+  byId('party-ruling').textContent   = l.ruling;
+  byId('party-opp').textContent      = l.opposition;
+  byId('meta-since').textContent     = l.since;
+  byId('meta-country').textContent   = l.country;
+
+  /* Populate tab content */
+  byId('content-history').textContent     = l.history;
+  byId('content-path').textContent        = l.path;
+  byId('content-controversy').textContent = l.controversy;
+
+  /* Reset to first tab */
+  activateTab('history');
+
+  /* Load engagement */
+  refreshEngagement(id);
+
+  /* Load opinions */
+  renderOpinions(id);
+
+  /* Reset opinion form */
+  byId('opinion-text').value = '';
+  byId('char-count').textContent = '0 / 300';
+  byId('opinion-error').textContent = '';
+
+  /* Show section */
+  const section = byId('profile-section');
+  section.style.display = 'block';
+
+  /* Scroll to it */
+  setTimeout(() => section.scrollIntoView({ behavior: 'smooth', block: 'start' }), 60);
+}
+
+/* ══════════════════════════════════════════
+   TABS
+══════════════════════════════════════════ */
+function activateTab(tabId) {
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.tab === tabId);
+  });
+  document.querySelectorAll('.tab-panel').forEach(panel => {
+    panel.classList.toggle('active', panel.id === 'tab-' + tabId);
+  });
+}
+
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => activateTab(btn.dataset.tab));
+});
+
+/* ══════════════════════════════════════════
+   CLOSE PROFILE
+══════════════════════════════════════════ */
+byId('profile-close').addEventListener('click', () => {
+  byId('profile-section').style.display = 'none';
+  state.current = null;
+  byId('leaders').scrollIntoView({ behavior: 'smooth', block: 'start' });
+});
+
+/* ══════════════════════════════════════════
+   ENGAGEMENT — VOTE
+══════════════════════════════════════════ */
+byId('btn-approve').addEventListener('click', () => {
+  const id = state.current;
+  if (!id) return;
+  const v = state.votes[id];
+  if (v.userVote === 'approve') { v.approve--; v.userVote = null; }
+  else { if (v.userVote) v[v.userVote]--; v.approve++; v.userVote = 'approve'; }
+  refreshEngagement(id);
+  showToast(v.userVote ? 'Vote recorded: Approve' : 'Vote removed');
+});
+
+byId('btn-disapprove').addEventListener('click', () => {
+  const id = state.current;
+  if (!id) return;
+  const v = state.votes[id];
+  if (v.userVote === 'disapprove') { v.disapprove--; v.userVote = null; }
+  else { if (v.userVote) v[v.userVote]--; v.disapprove++; v.userVote = 'disapprove'; }
+  refreshEngagement(id);
+  showToast(v.userVote ? 'Vote recorded: Disapprove' : 'Vote removed');
+});
+
+/* ══════════════════════════════════════════
+   ENGAGEMENT — REACTIONS
+══════════════════════════════════════════ */
+byId('btn-like').addEventListener('click', () => {
+  const id = state.current;
+  if (!id) return;
+  const r = state.reactions[id];
+  if (r.userReaction === 'likes') { r.likes--; r.userReaction = null; }
+  else { if (r.userReaction) r.dislikes--; r.likes++; r.userReaction = 'likes'; }
+  refreshEngagement(id);
+  showToast(r.userReaction ? 'You liked this' : 'Like removed');
+});
+
+byId('btn-dislike').addEventListener('click', () => {
+  const id = state.current;
+  if (!id) return;
+  const r = state.reactions[id];
+  if (r.userReaction === 'dislikes') { r.dislikes--; r.userReaction = null; }
+  else { if (r.userReaction) r.likes--; r.dislikes++; r.userReaction = 'dislikes'; }
+  refreshEngagement(id);
+  showToast(r.userReaction ? 'You disliked this' : 'Dislike removed');
+});
+
+/* ══════════════════════════════════════════
+   REFRESH ENGAGEMENT UI
+══════════════════════════════════════════ */
+function refreshEngagement(id) {
+  const v = state.votes[id];
+  const r = state.reactions[id];
+  const total = (v.approve + v.disapprove) || 1;
+  const pct   = Math.round((v.approve / total) * 100);
+
+  byId('approval-fill').style.width    = pct + '%';
+  byId('approve-count').textContent    = v.approve + ' approve';
+  byId('disapprove-count').textContent = v.disapprove + ' disapprove';
+  byId('like-count').textContent       = r.likes;
+  byId('dislike-count').textContent    = r.dislikes;
+
+  byId('btn-approve').classList.toggle('active', v.userVote === 'approve');
+  byId('btn-disapprove').classList.toggle('active', v.userVote === 'disapprove');
+  byId('btn-like').classList.toggle('active', r.userReaction === 'likes');
+  byId('btn-dislike').classList.toggle('active', r.userReaction === 'dislikes');
+}
+
+/* ══════════════════════════════════════════
+   OPINION FORM
+══════════════════════════════════════════ */
+byId('opinion-text').addEventListener('input', function() {
+  const len = this.value.length;
+  byId('char-count').textContent = len + ' / 300';
+  byId('char-count').style.color = len > 270 ? '#e07070' : '';
+});
+
+byId('opinion-form').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const id  = state.current;
+  const txt = byId('opinion-text').value.trim();
+  const err = byId('opinion-error');
+
+  if (!txt) { err.textContent = 'Please write something before submitting.'; return; }
+  if (txt.length < 5) { err.textContent = 'Opinion must be at least 5 characters.'; return; }
+
+  err.textContent = '';
+  state.opinions[id].unshift(txt);
+  byId('opinion-text').value = '';
+  byId('char-count').textContent = '0 / 300';
+  renderOpinions(id);
+  showToast('Opinion submitted!');
+});
+
+function renderOpinions(id) {
+  const list = byId('opinions-list');
+  list.innerHTML = '';
+  (state.opinions[id] || []).slice(0, 5).forEach(txt => {
+    const el = document.createElement('div');
+    el.className = 'opinion-item';
+    el.innerHTML = '<div class="op-meta">Anonymous &middot; Just now</div>' + escHtml(txt);
+    list.appendChild(el);
+  });
+}
+
+/* ══════════════════════════════════════════
+   AUTH MODAL
+══════════════════════════════════════════ */
+function openModal() {
+  byId('modal-overlay').style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+  setTimeout(() => { const f = byId('login-email'); if (f) f.focus(); }, 60);
+}
+function closeModal() {
+  byId('modal-overlay').style.display = 'none';
+  document.body.style.overflow = '';
+}
+
+byId('openLogin').addEventListener('click', openModal);
+const mob = byId('openLoginMobile');
+if (mob) mob.addEventListener('click', openModal);
+byId('modal-close').addEventListener('click', closeModal);
+byId('modal-overlay').addEventListener('click', function(e) { if (e.target === this) closeModal(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape' && byId('modal-overlay').style.display !== 'none') closeModal(); });
+
+/* Switch tabs */
+function switchAuthTab(show, hide) {
+  byId('tab-login-btn').classList.toggle('active', show === 'form-login');
+  byId('tab-signup-btn').classList.toggle('active', show === 'form-signup');
+  byId(show).style.display = 'flex';
+  byId(hide).style.display = 'none';
+  clearAuthErrors();
+}
+byId('tab-login-btn').addEventListener('click',  () => switchAuthTab('form-login',  'form-signup'));
+byId('tab-signup-btn').addEventListener('click', () => switchAuthTab('form-signup', 'form-login'));
+byId('go-signup').addEventListener('click',  () => switchAuthTab('form-signup', 'form-login'));
+byId('go-login').addEventListener('click',   () => switchAuthTab('form-login',  'form-signup'));
+byId('skip-login').addEventListener('click', closeModal);
+byId('skip-signup').addEventListener('click', closeModal);
+
+function clearAuthErrors() {
+  ['login-email-err','login-pw-err','su-name-err','su-email-err','su-pw-err','su-confirm-err','su-terms-err']
+    .forEach(id => { const el = byId(id); if (el) el.textContent = ''; });
+}
+
+function isEmail(v) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v); }
+
+/* Login submit */
+byId('form-login').addEventListener('submit', function(e) {
+  e.preventDefault();
+  let ok = true;
+  const email = byId('login-email').value.trim();
+  const pw    = byId('login-pw').value;
+  byId('login-email-err').textContent = '';
+  byId('login-pw-err').textContent    = '';
+
+  if (!email)         { byId('login-email-err').textContent = 'Email is required.'; ok = false; }
+  else if (!isEmail(email)) { byId('login-email-err').textContent = 'Enter a valid email.'; ok = false; }
+  if (!pw)            { byId('login-pw-err').textContent = 'Password is required.'; ok = false; }
+  else if (pw.length < 6)   { byId('login-pw-err').textContent = 'Minimum 6 characters.'; ok = false; }
+  if (!ok) return;
+
+  closeModal();
+  showToast('Welcome back! Signed in as ' + email.split('@')[0]);
+});
+
+/* Signup submit */
+byId('form-signup').addEventListener('submit', function(e) {
+  e.preventDefault();
+  let ok = true;
+  const name    = byId('su-name').value.trim();
+  const email   = byId('su-email').value.trim();
+  const pw      = byId('su-pw').value;
+  const confirm = byId('su-confirm').value;
+  const terms   = byId('su-terms').checked;
+  clearAuthErrors();
+
+  if (!name || name.length < 2) { byId('su-name-err').textContent = 'Enter your full name.'; ok = false; }
+  if (!email)         { byId('su-email-err').textContent = 'Email is required.'; ok = false; }
+  else if (!isEmail(email))   { byId('su-email-err').textContent = 'Enter a valid email.'; ok = false; }
+  if (!pw || pw.length < 6)   { byId('su-pw-err').textContent = 'Minimum 6 characters.'; ok = false; }
+  if (!confirm)               { byId('su-confirm-err').textContent = 'Please confirm password.'; ok = false; }
+  else if (confirm !== pw)    { byId('su-confirm-err').textContent = 'Passwords do not match.'; ok = false; }
+  if (!terms)                 { byId('su-terms-err').textContent = 'You must agree to the terms.'; ok = false; }
+  if (!ok) return;
+
+  closeModal();
+  showToast('Account created! Welcome, ' + name.split(' ')[0] + '!');
+});
+
+/* Password toggle */
+document.querySelectorAll('.toggle-pw').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const input = byId(btn.dataset.target);
+    const show  = input.type === 'password';
+    input.type  = show ? 'text' : 'password';
+    btn.setAttribute('aria-label', show ? 'Hide password' : 'Show password');
+  });
+});
+
+/* ══════════════════════════════════════════
+   HAMBURGER
+══════════════════════════════════════════ */
+byId('hamburger').addEventListener('click', function() {
+  const open = this.classList.toggle('open');
+  byId('nav-mobile').style.display = open ? 'flex' : 'none';
+});
+document.querySelectorAll('.nav-mobile a').forEach(a => {
+  a.addEventListener('click', () => {
+    byId('hamburger').classList.remove('open');
+    byId('nav-mobile').style.display = 'none';
+  });
+});
+
+/* ══════════════════════════════════════════
+   INIT
+══════════════════════════════════════════ */
+buildGrid();
+
+</script>
+</body>
+</html>
